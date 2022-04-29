@@ -10,8 +10,18 @@ import React, { Component } from 'react';
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://g6f68d74390b769-dbdesafio.adb.sa-vinhedo-1.oraclecloudapps.com/ords/mutant/",
+    baseURL: "https://hackacloud-oic-ax1wnzehpspk-vc.integration.ocp.oraclecloud.com/ic/api/integration/v1/flows/rest/RESTAURANTE_DESAFIO/1.0",
 });
+
+const token = "aGFja2FjbG91ZG11dGFudGxhYjpoQGNrQENMb3VEJDIwMjI="
+
+const options = {
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        'Authorization': `Basic ${token}`,
+        
+    }
+}
 
 
 export default class Restaurant extends Component {
@@ -40,7 +50,7 @@ export default class Restaurant extends Component {
 
     submitForm(e) {
         e.preventDefault();
-        api.post('restaurantes/', this.state).then(res => {
+        api.post('/restaurantes', this.state, options).then(res => {
             console.log(res.data)
         })
     }
